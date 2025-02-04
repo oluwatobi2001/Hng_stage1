@@ -60,7 +60,7 @@ const funFact = async (num) => {
 };
 
 // ✅ FIXED ROUTE
-app.get("/hello", async (req, res) => {
+app.get("/api/classify-number", async (req, res) => {
     try {
         const { number } = req.query;
         const numberFormatted = parseInt(number, 10);
