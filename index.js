@@ -76,11 +76,13 @@ app.get("/api/classify-number", async (req, res) => {
                 [{"type":"missing","loc":["query","number"],"msg":"Field required","input":null}]
             })
         }
-        const numberFormatted = Math.abs(parseInt(number, 10));
+        const newNum = Number(number);
+
+        const numberFormatted = Math.abs(newNum);
 
         if (isNaN(numberFormatted)) {
             return res.status(400).json({
-                "number": "alphabet",
+                "number": newNum,
                 "error": true
             });
         }
