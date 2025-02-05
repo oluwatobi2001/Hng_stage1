@@ -63,6 +63,19 @@ const funFact = async (num) => {
 app.get("/api/classify-number", async (req, res) => {
     try {
         const { number } = req.query;
+
+        if(!req.query ) {
+            res.status(500).json({
+                "detail":
+                [{"type":"missing","loc":["query","number"],"msg":"Field required","input":null}]
+            })
+        }
+        if(number == null) {
+            res.status(500).json({
+                "detail":
+                [{"type":"missing","loc":["query","number"],"msg":"Field required","input":null}]
+            })
+        }
         const numberFormatted = Math.abs(parseInt(number, 10));
 
         if (isNaN(numberFormatted)) {
