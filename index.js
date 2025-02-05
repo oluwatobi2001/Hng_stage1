@@ -63,7 +63,7 @@ const funFact = async (num) => {
 app.get("/api/classify-number", async (req, res) => {
     try {
         const { number } = req.query;
-        const numberFormatted = parseInt(number, 10);
+        const numberFormatted = Math.abs(parseInt(number, 10));
 
         if (isNaN(numberFormatted)) {
             return res.status(400).json({
