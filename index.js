@@ -32,7 +32,8 @@ const checkPerfect = (num) => {
 };
 
 const sumDigit = (num) => {
-    return num.toString().split("").reduce((acc, digit) => acc + parseInt(digit), 0);
+    const numberFormatted = Math.abs(num);
+    return numberFormatted.toString().split("").reduce((acc, digit) => acc + parseInt(digit), 0);
 };
 
 const checkArmstrong = (num) => {
@@ -78,34 +79,34 @@ app.get("/api/classify-number", async (req, res) => {
         }
         const newNum = Number(number);
 
-        const numberFormatted = Math.abs(newNum);
+        
 
-        if (isNaN(numberFormatted)) {
+        if (isNaN(newNum)) {
             return res.status(400).json({
                 "number": number,
                 "error": true
             });
         }
 
-        const fact = await funFact(numberFormatted); 
+        const fact = await funFact(newNum); 
      
-        const propertiesSection =(numberFormatted)=>{
-            checkOdd(numberFormatted)
-            if(checkArmstrong(numberFormatted)) {
-                return ["armstrong", checkOdd(numberFormatted)]
+        const propertiesSection =(newNum)=>{
+            checkOdd(newNum)
+            if(checkArmstrong(newNum)) {
+                return ["armstrong", checkOdd(newNum)]
             }
             else {
-                return[checkOdd(numberFormatted)]
+                return[checkOdd(newNum)]
             }
 
         }
 
         res.status(200).json({
-            "number": numberFormatted,
-            "is_prime": checkPrime(numberFormatted),
-            "is_perfect": checkPerfect(numberFormatted),
-            "properties": propertiesSection(numberFormatted),
-            "digit_sum": sumDigit(numberFormatted),
+            "number": newNum,
+            "is_prime": checkPrime(newNum),
+            "is_perfect": checkPerfect(newNum),
+            "properties": propertiesSection(newNum),
+            "digit_sum": sumDigit(newNum),
             "fun_fact": fact
         });
 
